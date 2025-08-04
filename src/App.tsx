@@ -6,17 +6,17 @@ import { NotFound } from "./components/NotFound";
 import { SignUp } from "./components/SignUp";
 import Layout from "./components/commons/Layout";
 import CircleSpinner from "./components/CircleSpinner"; // You'll need to create this
+import { baseUrl } from "./config";
 
 function App() {
   const [isBackendHealthy, setIsBackendHealthy] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  console.log(baseUrl);
 
   useEffect(() => {
     const checkBackendHealth = async () => {
       try {
-        const response = await fetch(
-          `https://express-ts-api-fhcn.onrender.com/health`
-        );
+        const response = await fetch(`${baseUrl}/health`);
         if (response.ok) {
           const data = await response.json();
           if (data.status === "UP") {
