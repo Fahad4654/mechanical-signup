@@ -2,6 +2,9 @@ FROM node:24 AS builder
 WORKDIR /app
 COPY . .
 RUN npm install
+
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 RUN npm run build
 
 FROM nginx:alpine
